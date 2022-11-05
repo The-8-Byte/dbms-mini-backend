@@ -1,6 +1,10 @@
 const { Router } = require("express");
 
-const { admin_login, admin_signup } = require("../controllers/authController");
+const {
+  admin_login,
+  admin_signup,
+  get_admin,
+} = require("../controllers/authController");
 
 const {
   insert_book,
@@ -29,19 +33,20 @@ adminRouter.post("/insert", requireAdminAuth, insert_book);
 adminRouter.post("/delete/:id", requireAdminAuth, remove_book);
 adminRouter.post("/update/:id", requireAdminAuth, update_book);
 adminRouter.post("/returnBook/:id", requireAdminAuth, returnBook);
-adminRouter.post("/viewAllUsers", requireAdminAuth, viewAllUsers);
 adminRouter.post("/deleteUser/:id", requireAdminAuth, delete_user);
 adminRouter.post("/updateUser/:id", requireAdminAuth, update_user);
 adminRouter.get("/getUser/:id", requireAdminAuth, getUser);
 adminRouter.get("/getIssuedBooksByUser/:id", requireAdminAuth, getBooksByUser);
 
+adminRouter.get("/viewAllUsers", requireAdminAuth, viewAllUsers);
+adminRouter.get("getAdmin", requireAdminAuth, get_admin);
 adminRouter.get("/viewAllBooks", requireAdminAuth, viewAllBooks);
 adminRouter.get(
   "/viewAllAvailableBooks",
   requireAdminAuth,
   viewAllAvailableBooks
 );
-adminRouter.post(
+adminRouter.get(
   "/viewAllIssuedBookswithUser",
   requireAdminAuth,
   viewAllIssuedBookswithUser

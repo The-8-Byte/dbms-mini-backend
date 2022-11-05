@@ -29,6 +29,10 @@ const issuedBySchema = new mongoose.Schema({
     type: String,
     required: [true, "Please enter User Name"],
   },
+  email: {
+    type: String,
+    required: [true, "Please enter email"],
+  },
 
   issue_date: {
     type: Date,

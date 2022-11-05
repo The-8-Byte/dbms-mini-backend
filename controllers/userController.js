@@ -90,7 +90,7 @@ module.exports.issueBook = async (req, res) => {
       const data = await Book.updateOne({ id }, { $set: { status: false } });
 
       const { book_name, author } = book_data;
-      const { _id, first_name, last_name } = req.user;
+      const { _id, first_name, last_name, email } = req.user;
 
       const issue_data = await Issue.create({
         book_id: book_data._id,
@@ -99,6 +99,7 @@ module.exports.issueBook = async (req, res) => {
         user_id: _id,
         user_first_name: first_name,
         user_last_name: last_name,
+        email,
       });
       res.status(200).json({ issue_data });
     } else {

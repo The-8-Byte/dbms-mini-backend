@@ -8,12 +8,12 @@ const handleError = (err) => {
   let errors = { email: "", password: "" };
 
   // incorrect email
-  if (err.message === "incorrect email") {
+  if (err.message === "Invalid Email.") {
     errors.email = "That email is not registered";
   }
 
   // incorrect password
-  if (err.message === "incorrect password") {
+  if (err.message === "Incorrect Password") {
     errors.password = "That password is incorrect";
   }
 
@@ -47,7 +47,9 @@ module.exports.admin_login = async (req, res) => {
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(200).json({ admin });
   } catch (err) {
+    console.log(err);
     const errors = handleError(err);
+    console.log(errors);
     res.status(400).json({ errors });
   }
 };
@@ -74,7 +76,7 @@ module.exports.auth = async (req, res) => {
     if (token) {
       jwt.verify(token, process.env.SECRET_KEY, async (err, decodedToken) => {
         if (err) {
-          res.status(100).json({ msg: "Proceed to login" });
+          res.status(200).json({ msg: "Proceed to login" });
         } else {
           const admin = await Admin.findById(decodedToken.id);
           const user = await User.findById(decodedToken.id);
@@ -87,10 +89,10 @@ module.exports.auth = async (req, res) => {
         }
       });
     } else {
-      res.status(100).json({ msg: "Proceed to login" });
+      res.status(404).json({ msg: "Proceed to login" });
     }
   } else {
-    res.status(100).json({ msg: "Proceed to login" });
+    res.status(404).json({ msg: "Proceed to login" });
   }
 };
 

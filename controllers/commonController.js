@@ -7,8 +7,8 @@ module.exports.viewAllBooks = async (req, res) => {
     const data = await Books.find();
     res.status(200).json({ data });
   } catch (err) {
-    const error = handleError(err);
-    res.status(404).json({ error });
+    const errors = handleError(err);
+    res.status(404).json({ errors });
   }
 };
 

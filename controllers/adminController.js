@@ -75,8 +75,8 @@ module.exports.returnBook = async (req, res) => {
     }
   } catch (err) {
     console.log(err);
-    const error = handleError(err);
-    res.status(404).json({ error });
+    const errors = handleError(err);
+    res.status(404).json({ errors });
   }
 };
 
@@ -85,8 +85,8 @@ module.exports.viewAllUsers = async (req, res) => {
     const data = await User.find();
     res.status(200).json({ data });
   } catch (err) {
-    const error = handleError(err);
-    res.status(404).json({ error });
+    const errors = handleError(err);
+    res.status(404).json({ errors });
   }
 };
 
@@ -95,8 +95,8 @@ module.exports.viewAllIssuedBookswithUser = async (req, res) => {
     const data = await Issued.find();
     res.status(200).json({ data });
   } catch (err) {
-    const error = handleError(err);
-    res.status(404).json({ error });
+    const errors = handleError(err);
+    res.status(404).json({ errors });
   }
 };
 
@@ -129,8 +129,8 @@ module.exports.update_user = async (req, res) => {
 
     res.status(200).json({ data });
   } catch (err) {
-    const error = handleError(err);
-    res.status(404).json({ error });
+    const errors = handleError(err);
+    res.status(404).json({ errors });
   }
 };
 
