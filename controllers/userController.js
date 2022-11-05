@@ -86,7 +86,6 @@ module.exports.issueBook = async (req, res) => {
   const id = req.params.id;
   try {
     const book_data = await Book.findOne({ _id: id });
-    console.log(book_data.status);
     if (book_data.status === true) {
       const data = await Book.updateOne({ id }, { $set: { status: false } });
 
@@ -106,7 +105,6 @@ module.exports.issueBook = async (req, res) => {
       res.status(404).json({ msg: "book not available cannot issue" });
     }
   } catch (err) {
-    console.log(err);
     const error = handleError(err);
     res.status(404).json({ error });
   }

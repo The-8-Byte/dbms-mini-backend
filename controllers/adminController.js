@@ -99,3 +99,60 @@ module.exports.viewAllIssuedBookswithUser = async (req, res) => {
     res.status(404).json({ error });
   }
 };
+
+module.exports.delete_user = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const data = await User.deleteOne({ _id: id });
+    res.status(200).json({ data });
+  } catch (err) {
+    const error = handleError(err);
+    res.status(404).json({ error });
+  }
+};
+
+module.exports.update_user = async (req, res) => {
+  const id = req.params.id;
+  const { first_name, last_name, email } = req.body;
+
+  try {
+    const data = await User.updateOne(
+      { id },
+      {
+        $set: {
+          first_name,
+          last_name,
+          email,
+        },
+      }
+    );
+
+    res.status(200).json({ data });
+  } catch (err) {
+    const error = handleError(err);
+    res.status(404).json({ error });
+  }
+};
+
+module.exports.getUser = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const data = await User.findOne({ _id: id });
+    res.status(200).json({ data });
+  } catch (err) {
+    const error = handleError(err);
+    res.status(404).json({ error });
+  }
+};
+
+module.exports.getBooksByUser = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const data = await Issued.find({ user_id: id });
+    res.status(200).json({ data });
+  } catch (err) {
+    const error = handleError(err);
+    res.status(404).json({ error });
+  }
+};
+// module.export.

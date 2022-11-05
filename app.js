@@ -6,6 +6,7 @@ const userRoutes = require("./routes/userRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const logoutRoute = require("./routes/logoutRoute");
 const authRoutes = require("./routes/authRoutes");
+const checkRoute = require("./routes/checkRoute");
 
 const cors = require("cors");
 dotenv.config({ path: "./config.env" });
@@ -34,3 +35,4 @@ app.use(userRoutes);
 app.use(adminRoutes);
 app.use(logoutRoute);
 app.use(authRoutes);
+app.use(checkRoute);
