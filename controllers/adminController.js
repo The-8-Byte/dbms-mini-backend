@@ -15,8 +15,8 @@ module.exports.insert_book = async (req, res) => {
     });
     res.status(200).json({ data });
   } catch (err) {
-    const error = handleError(err);
-    res.status(404).json({ error });
+    const errors = handleError(err);
+    res.status(404).json({ errors });
   }
 };
 
@@ -26,8 +26,8 @@ module.exports.remove_book = async (req, res) => {
     const data = await Book.deleteOne({ _id: id });
     res.status(200).json({ data });
   } catch (err) {
-    const error = handleError(err);
-    res.status(404).json({ error });
+    const errors = handleError(err);
+    res.status(404).json({ errors });
   }
 };
 
@@ -36,7 +36,7 @@ module.exports.update_book = async (req, res) => {
   const { book_name, author } = req.body;
   try {
     const data = await Book.updateOne(
-      { id },
+      { _id: id },
       {
         $set: {
           book_name,
@@ -46,9 +46,9 @@ module.exports.update_book = async (req, res) => {
     );
     res.status(200).json({ data });
   } catch (err) {
-    const error = handleError(err);
+    const errors = handleError(err);
     console.log(err);
-    res.status(404).json({ error });
+    res.status(404).json({ errors });
   }
 };
 
@@ -63,7 +63,7 @@ module.exports.returnBook = async (req, res) => {
         .json({ msg: "it is not issued, so can't return the book." });
     } else {
       const book_data = await Book.updateOne(
-        { id },
+        { _id: id },
         {
           $set: {
             status: true,
@@ -117,7 +117,7 @@ module.exports.update_user = async (req, res) => {
 
   try {
     const data = await User.updateOne(
-      { id },
+      { _id: id },
       {
         $set: {
           first_name,
@@ -140,8 +140,8 @@ module.exports.getUser = async (req, res) => {
     const data = await User.findOne({ _id: id });
     res.status(200).json({ data });
   } catch (err) {
-    const error = handleError(err);
-    res.status(404).json({ error });
+    const errors = handleError(err);
+    res.status(404).json({ errors });
   }
 };
 
@@ -153,6 +153,16 @@ module.exports.getBooksByUser = async (req, res) => {
   } catch (err) {
     const error = handleError(err);
     res.status(404).json({ error });
+  }
+};
+module.exports.getBook = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const data = await Book.findOne({ _id: id });
+    res.status(200).json({ data });
+  } catch (err) {
+    const errors = handleError(err);
+    res.status(404).json({ errors });
   }
 };
 // module.export.

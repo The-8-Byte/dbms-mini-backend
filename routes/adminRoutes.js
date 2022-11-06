@@ -17,6 +17,7 @@ const {
   viewAllIssuedBookswithUser,
   getUser,
   getBooksByUser,
+  getBook,
 } = require("../controllers/adminController");
 
 const {
@@ -35,11 +36,12 @@ adminRouter.post("/update/:id", requireAdminAuth, update_book);
 adminRouter.post("/returnBook/:id", requireAdminAuth, returnBook);
 adminRouter.post("/deleteUser/:id", requireAdminAuth, delete_user);
 adminRouter.post("/updateUser/:id", requireAdminAuth, update_user);
+adminRouter.get("/getBook/:id", requireAdminAuth, getBook);
 adminRouter.get("/getUser/:id", requireAdminAuth, getUser);
 adminRouter.get("/getIssuedBooksByUser/:id", requireAdminAuth, getBooksByUser);
 
 adminRouter.get("/viewAllUsers", requireAdminAuth, viewAllUsers);
-adminRouter.get("getAdmin", requireAdminAuth, get_admin);
+adminRouter.get("/getAdmin", requireAdminAuth, get_admin);
 adminRouter.get("/viewAllBooks", requireAdminAuth, viewAllBooks);
 adminRouter.get(
   "/viewAllAvailableBooks",

@@ -19,7 +19,7 @@ const userRouter = Router();
 
 userRouter.post("/login", login);
 userRouter.post("/signup", signup);
-userRouter.post("/getprofile", requireAuth, getuser);
+userRouter.get("/getprofile", requireAuth, getuser);
 userRouter.get("/viewSelfIssuedBooks", requireAuth, viewSelfIssuedBooks);
 userRouter.post("/issueBook/:id", requireAuth, issueBook);
 userRouter.get("/viewAllBooks", requireAuth, viewAllBooks);
