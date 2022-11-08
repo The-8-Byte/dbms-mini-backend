@@ -98,5 +98,9 @@ module.exports.auth = async (req, res) => {
 
 module.exports.get_admin = async (req, res) => {
   let admin = req.Admin;
-  res.status(200).json({ admin });
+  try {
+    res.status(200).json({ admin });
+  } catch (errors) {
+    res.status(404).json({ errors });
+  }
 };
